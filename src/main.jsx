@@ -7,6 +7,11 @@ import Root from './Layout/Root.jsx'
 import Home from './Component/Home/Home.jsx'
 import Login from './Component/Login/Login.jsx'
 import Register from './Component/Register/Register.jsx'
+import AuthProvider from './Context/AuthContext/AuthProvider.jsx'
+import PrivateRoutes from './Routes/PrivateRoutes.jsx'
+import Profile from './Component/Profile/Profile.jsx'
+import Orders from './Component/Orders/Orders.jsx'
+import DeshBoard from './Component/DeshBoard/DeshBoard.jsx'
 
 
 const router = createBrowserRouter([
@@ -25,6 +30,18 @@ const router = createBrowserRouter([
       {
         path: 'register',
         Component: Register
+      },
+      {
+        path: 'profile',
+        element: <PrivateRoutes><Profile></Profile></PrivateRoutes>
+      },
+      {
+        path: 'orders',
+        element: <PrivateRoutes><Orders></Orders></PrivateRoutes>
+      },
+      {
+        path: 'deshboard',
+        element: <PrivateRoutes><DeshBoard></DeshBoard></PrivateRoutes>
       }
     ]
   }
@@ -32,6 +49,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )
